@@ -1,0 +1,11 @@
+# report-pipeline
+test_id: EX-E001-00000001
+test_name: report-pileline
+test_description: report環境構築とテスト
+pipelines:
+  - init:
+    tasks:
+      - test_result
+  - environment_provisioning:
+  - test_scenario:
+  - closing:
