@@ -7,8 +7,8 @@ parameters:
     database: true
     kafka: true
     create_table: true
-    create_table_image: create_table
     insert_table: true
+    create_table_image: create_table
     insert_table_image: insert_table
   test_scenario:
     - name: D2025-03-12
