@@ -7,7 +7,7 @@ parameters:
     database: true
     kafka: true
     create_table: true
-    insert_table: true
+    insert_table: false
     create_table_image: create_table
     insert_table_image: insert_table
   test_scenario:
