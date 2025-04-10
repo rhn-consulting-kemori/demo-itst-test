@@ -4,9 +4,9 @@ test_description: report環境構築とテスト
 namespace_name: demo-itst
 parameters:
   environment:
-    database: true
+    database: false
     kafka: true
-    create_table: true
+    create_table: false
     insert_table: false
     create_table_image: create_table
     insert_table_image: insert_table
