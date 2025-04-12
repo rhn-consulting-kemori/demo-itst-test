@@ -1,0 +1,26 @@
+test_id: EX-E001-00000003
+test_name: test-pileline
+test_description: 環境構築してスクラップしない。
+namespace_name: demo-itst
+parameters:
+  environment:
+    database: true
+    kafka: true
+    create_table: true
+    insert_table: true
+    create_table_image: create_table
+    insert_table_image: insert_table
+  test_scenario:
+    - name: D2025-03-12
+  closing:
+    environment_remove: true
+pipelines:
+  - seq: 1
+    type: init
+    name: init-job
+  - seq: 2
+    type: environment
+    name: environment-workflow
+  - seq: 3
+    type: test_scenario
+    name: D2025-03-12
