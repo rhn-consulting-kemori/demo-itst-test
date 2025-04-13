@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: demo-batch-job2
+  namespace: "{{ namespace_name }}"
+  labels:
+    app: demo-batch-job2
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: demo-batch-job2
+          image: quay.io/rhn_consulting_kemori/demo-batch:latest
+          imagePullPolicy: Always
