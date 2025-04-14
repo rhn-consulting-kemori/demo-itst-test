@@ -1,6 +1,7 @@
-name: test_task
-url: http://127.0.0.1:8089/api/test_task
-method: POST
+data_entry_name: test_task
+call_api_url: https://result-manager-{{ namespace_name }}.{{ openshift_domain }}/api/test_task
+call_api_method: POST
+ok_response_code: 201
 description: テストタスク登録
 data_list:
     - '{"test_result_seq":2, "test_id": "ST-E001-00000002", "test_group": "環境立上", "test_pipeline": "環境構築", "test_task": "NameSpace作成", "simulation_date": "", "start_time": "2025-03-21 17:00:00", "end_time": "2025-03-21 17:00:05", "test_result": "OK", "evidence_link": "-", "sw_category": "", "sw_id": "", "sw_name": "", "sw_version": ""}'

@@ -1,6 +1,0 @@
-name: test_result_summary
-url: http://127.0.0.1:8089/api/test_result_summary
-method: POST
-description: テスト結果集約
-data_list:
-    - '{"test_result_seq": 2}'
