@@ -1,0 +1,7 @@
+data_entry_name: test_result
+call_api_url: https://result-manager-{{ namespace_name }}.{{ openshift_domain }}/api/test_result
+call_api_method: POST
+ok_response_code: 201
+description: テスト結果登録
+data_list:
+    - '{"test_id": "ST-E001-00000002", "test_name": "サンプルテスト", "test_description": "サンプル"}'
