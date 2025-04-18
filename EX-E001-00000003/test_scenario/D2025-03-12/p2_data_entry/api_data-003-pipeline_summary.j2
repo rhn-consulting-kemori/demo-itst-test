@@ -1,0 +1,24 @@
+data_entry_name: pipeline_summary
+call_api_url: https://result-manager-{{ namespace_name }}.{{ openshift_domain }}/api/pipeline_summary
+call_api_method: POST
+ok_response_code: 201
+description: テストパイプライン集約
+data_list:
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "環境立上", "test_pipeline": "環境構築", "simulation_date": ""}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "環境立上", "test_pipeline": "初期データ設定", "simulation_date": ""}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "オンライン立上", "simulation_date": "2025-03-12"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "データ投入", "simulation_date": "2025-03-12"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "バッチ処理", "simulation_date": "2025-03-12"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "結果検証", "simulation_date": "2025-03-12"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "オンライン停止", "simulation_date": "2025-03-12"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "オンライン立上", "simulation_date": "2025-03-15"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "データ投入", "simulation_date": "2025-03-15"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "バッチ処理", "simulation_date": "2025-03-15"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "結果検証", "simulation_date": "2025-03-15"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "オンライン停止", "simulation_date": "2025-03-15"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "オンライン立上", "simulation_date": "2025-03-20"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "データ投入", "simulation_date": "2025-03-20"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "バッチ処理", "simulation_date": "2025-03-20"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "結果検証", "simulation_date": "2025-03-20"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "テストシナリオ", "test_pipeline": "オンライン停止", "simulation_date": "2025-03-20"}'
+    - '{"test_result_seq": 2, "test_id": "ST-E001-00000002", "test_group": "クロージング", "test_pipeline": "環境スクラップ", "simulation_date": ""}'
