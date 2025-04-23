@@ -3,4 +3,4 @@ SELECT
 FROM 
     test_result
 ORDER BY
-    test_result_seq;
+    test_result_seq

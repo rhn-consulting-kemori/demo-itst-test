@@ -3,4 +3,4 @@ SELECT
 FROM 
     test_pipeline_summary
 ORDER BY 
-    test_pipeline_summary_seq;
+    test_pipeline_summary_seq

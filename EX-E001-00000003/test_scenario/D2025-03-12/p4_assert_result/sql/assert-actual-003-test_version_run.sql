@@ -3,4 +3,4 @@ SELECT
 FROM
     test_version_run 
 ORDER BY
-    test_version_run_seq;
+    test_version_run_seq

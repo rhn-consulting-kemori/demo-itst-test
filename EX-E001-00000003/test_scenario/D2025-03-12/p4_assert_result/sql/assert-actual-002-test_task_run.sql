@@ -3,4 +3,4 @@ SELECT
 FROM 
     test_task_run 
 ORDER BY
-    test_task_run_seq;
+    test_task_run_seq
