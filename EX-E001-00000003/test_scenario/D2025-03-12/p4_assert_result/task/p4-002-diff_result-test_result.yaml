@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: p4-002-diff-result-test-result
+  namespace: demo-itst
+  labels:
+    app: p4-002-diff-result-test-result
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: p4-002-diff-result-test-result
+          image: quay.io/rhn_consulting_kemori/diff-result:latest
+          imagePullPolicy: Always
+          env:
+            - name: ACTUAL_DIR_PATH
+              value: /mnt/data/assert/actual/
+            - name: EXPECTED_DIR_PATH
+              value: /mnt/data/assert/expected/
+            - name: DIFF_DIR_PATH
+              value: /mnt/data/assert/result/
+            - name: ACTUAL_FILE_NAME
+              value: assert-actual-001-test_result.csv
+            - name: EXPECTED_FILE_NAME
+              value: assert-expected-001-test_result.csv
+            - name: DIFF_FILE_NAME
+              value: assert-diff-001-test_result.txt
+          volumeMounts:
+            - name: p4-002-diff-result-test-result-vol
+              mountPath: /mnt/data
+      volumes:
+        - name: p4-002-diff-result-test-result-vol
+          persistentVolumeClaim:
+            claimName: demo-efs-pvc1
+      imagePullSecrets:
+        - name: quayio
