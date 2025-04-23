@@ -25,11 +25,11 @@ spec:
             - name: DB_USER
               value: test
             - name: INPUT_FILE_PATH
-              value: /mnt/data/assert/sql
+              value: /mnt/data/assert/sql/
             - name: INPUT_FILE_NAME
               value: assert-actual-001-test_result.sql
             - name: OUTPUT_FILE_PATH
-              value: /mnt/data/assert/autual
+              value: /mnt/data/assert/autual/
             - name: OUTPUT_FILE_NAME
               value: assert-actual-001-test_result.csv
           volumeMounts:
