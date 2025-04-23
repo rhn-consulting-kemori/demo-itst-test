@@ -29,7 +29,7 @@ spec:
             - name: INPUT_FILE_NAME
               value: assert-actual-001-test_result.sql
             - name: OUTPUT_FILE_PATH
-              value: /mnt/data/assert/autual/
+              value: /mnt/data/assert/actual/
             - name: OUTPUT_FILE_NAME
               value: assert-actual-001-test_result.csv
           volumeMounts:
