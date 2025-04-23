@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: p4-001-get_database_result-test_result
+  namespace: demo-itst
+  labels:
+    app: p4-001-get_database_result-test_result
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: p4-001-get_database_result-test_result
+          image: quay.io/rhn_consulting_kemori/get-database-result:latest
+          imagePullPolicy: Always
+          env:
+            - name: DB_HOST
+              value: postgresql.demo-itst.svc.cluster.local
+            - name: DB_NAME
+              value: test
+            - name: DB_PASS
+              value: test
+            - name: DB_PORT
+              value: '5432'
+            - name: DB_USER
+              value: test
+            - name: INPUT_FILE_PATH
+              value: /mnt/data/assert/sql
+            - name: INPUT_FILE_NAME
+              value: assert-actual-001-test_result.sql
+            - name: OUTPUT_FILE_PATH
+              value: /mnt/data/assert/autual
+            - name: OUTPUT_FILE_NAME
+              value: assert-actual-001-test_result.csv
+          volumeMounts:
+            - name: p4-001-get_database_result-test_result-vol
+              mountPath: /mnt/data
+      volumes:
+        - name: p4-001-get_database_result-test_result-vol
+          persistentVolumeClaim:
+            claimName: demo-efs-pvc1
+      imagePullSecrets:
+        - name: quayio
