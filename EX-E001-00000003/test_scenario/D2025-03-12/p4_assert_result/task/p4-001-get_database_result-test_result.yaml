@@ -1,16 +1,16 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: p4-001-get_database_result-test_result
+  name: p4-001-get-database-result-test-result
   namespace: demo-itst
   labels:
-    app: p4-001-get_database_result-test_result
+    app: p4-001-get-database-result-test-result
 spec:
   template:
     spec:
       restartPolicy: Never
       containers:
-        - name: p4-001-get_database_result-test_result
+        - name: p4-001-get-database-result-test-result
           image: quay.io/rhn_consulting_kemori/get-database-result:latest
           imagePullPolicy: Always
           env:
@@ -33,10 +33,10 @@ spec:
             - name: OUTPUT_FILE_NAME
               value: assert-actual-001-test_result.csv
           volumeMounts:
-            - name: p4-001-get_database_result-test_result-vol
+            - name: p4-001-get-database-result-test-result-vol
               mountPath: /mnt/data
       volumes:
-        - name: p4-001-get_database_result-test_result-vol
+        - name: p4-001-get-database-result-test-result-vol
           persistentVolumeClaim:
             claimName: demo-efs-pvc1
       imagePullSecrets:
