@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: p4-002-diff-result-test-result
-  namespace: demo-itst
+  namespace: "{{ namespace_name }}"
   labels:
     app: p4-002-diff-result-test-result
 spec:
@@ -32,6 +32,6 @@ spec:
       volumes:
         - name: p4-002-diff-result-test-result-vol
           persistentVolumeClaim:
-            claimName: demo-efs-pvc1
+            claimName: "{{ pvc_name }}"
       imagePullSecrets:
-        - name: quayio
+        - name: "{{ image_pull_secret_name }}"

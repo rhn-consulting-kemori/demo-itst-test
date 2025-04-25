@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: p4-001-get-database-result-test-result
-  namespace: demo-itst
+  namespace: "{{ namespace_name }}"
   labels:
     app: p4-001-get-database-result-test-result
 spec:
@@ -15,15 +15,15 @@ spec:
           imagePullPolicy: Always
           env:
             - name: DB_HOST
-              value: postgresql.demo-itst.svc.cluster.local
+              value: "{{ database_app_name }}.{{ namespace_name }}.svc.cluster.local"
             - name: DB_NAME
-              value: test
+              value: "{{ pg_database }}"
             - name: DB_PASS
-              value: test
+              value: "{{ pg_password }}"
             - name: DB_PORT
-              value: '5432'
+              value: "{{ pg_port }}"
             - name: DB_USER
-              value: test
+              value: "{{ pg_user }}"
             - name: INPUT_FILE_PATH
               value: /mnt/data/assert/sql/
             - name: INPUT_FILE_NAME
@@ -38,6 +38,6 @@ spec:
       volumes:
         - name: p4-001-get-database-result-test-result-vol
           persistentVolumeClaim:
-            claimName: demo-efs-pvc1
+            claimName: "{{ pvc_name }}"
       imagePullSecrets:
-        - name: quayio
+        - name: "{{ image_pull_secret_name }}"
