@@ -1,16 +1,16 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: p4-001-get-database-result-test-result
+  name: get-database-{{ assert_task_name }}
   namespace: "{{ namespace_name }}"
   labels:
-    app: p4-001-get-database-result-test-result
+    app: get-database-{{ assert_task_name }}
 spec:
   template:
     spec:
       restartPolicy: Never
       containers:
-        - name: p4-001-get-database-result-test-result
+        - name: get-database-{{ assert_task_name }}
           image: quay.io/rhn_consulting_kemori/get-database-result:latest
           imagePullPolicy: Always
           env:
@@ -27,16 +27,16 @@ spec:
             - name: INPUT_FILE_PATH
               value: /mnt/data/assert/sql/
             - name: INPUT_FILE_NAME
-              value: assert-actual-001-test_result.sql
+              value: "{{ assert_task_name }}.sql"
             - name: OUTPUT_FILE_PATH
               value: /mnt/data/assert/actual/
             - name: OUTPUT_FILE_NAME
-              value: assert-actual-001-test_result.csv
+              value: actual-{{ assert_task_name }}.csv
           volumeMounts:
-            - name: p4-001-get-database-result-test-result-vol
+            - name: get-database-{{ assert_task_name }}-vol
               mountPath: /mnt/data
       volumes:
-        - name: p4-001-get-database-result-test-result-vol
+        - name: get-database-{{ assert_task_name }}-vol
           persistentVolumeClaim:
             claimName: "{{ pvc_name }}"
       imagePullSecrets:

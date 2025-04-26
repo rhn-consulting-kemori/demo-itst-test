@@ -1,0 +1,13 @@
+tasks:
+  - seq: 1
+    name: assert-001-20250312-test_result
+    type: sql
+  - seq: 2
+    name: assert-002-20250312-test_task
+    type: sql
+  - seq: 3
+    name: assert-003-20250312-test_version_run
+    type: sql
+  - seq: 4
+    name: assert-004-20250312-pipeline_summary
+    type: sql
