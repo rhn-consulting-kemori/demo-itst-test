@@ -3,11 +3,11 @@ tasks:
     name: assert-001-20250312-test-result
     type: sql
   - seq: 2
-    name: assert-002-20250312-test-task
+    name: assert-002-20250312-test-task-run
     type: sql
   - seq: 3
     name: assert-003-20250312-test-version-run
     type: sql
   - seq: 4
-    name: assert-004-20250312-pipeline-summary
+    name: assert-004-20250312-test-pipeline-summary
     type: sql
