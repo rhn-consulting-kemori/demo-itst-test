@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: get-database-{{ assert_task_name }}
+  namespace: "{{ namespace_name }}"
+  labels:
+    app: get-database-{{ assert_task_name }}
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: get-database-{{ assert_task_name }}
+          image: quay.io/rhn_consulting_kemori/get-database-result:latest
+          imagePullPolicy: Always
+          env:
+            - name: DB_HOST
+              value: "{{ database_app_name }}.{{ namespace_name }}.svc.cluster.local"
+            - name: DB_NAME
+              value: "{{ pg_database }}"
+            - name: DB_PASS
+              value: "{{ pg_password }}"
+            - name: DB_PORT
+              value: "{{ pg_port }}"
+            - name: DB_USER
+              value: "{{ pg_user }}"
+            - name: INPUT_FILE_PATH
+              value: /mnt/data/assert/sql/
+            - name: INPUT_FILE_NAME
+              value: "{{ assert_task_name }}.sql"
+            - name: OUTPUT_FILE_PATH
+              value: /mnt/data/assert/actual/
+            - name: OUTPUT_FILE_NAME
+              value: actual-{{ assert_task_name }}.csv
+          volumeMounts:
+            - name: get-database-{{ assert_task_name }}-vol
+              mountPath: /mnt/data
+      volumes:
+        - name: get-database-{{ assert_task_name }}-vol
+          persistentVolumeClaim:
+            claimName: "{{ pvc_name }}"
+      imagePullSecrets:
+        - name: "{{ image_pull_secret_name }}"
