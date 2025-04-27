@@ -1,6 +1,6 @@
-test_id: EX-E001-00000003
+test_id: EX-E001-00000001
 test_name: test-pileline
-test_description: 環境構築してスクラップしない。
+test_description: デモパイプライン：環境構築するけど、スクラップはしない。
 namespace_name: demo-itst
 parameters:
   environment:
