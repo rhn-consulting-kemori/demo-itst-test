@@ -1,3 +1,4 @@
 delete_online_apps:
-  - name: result-manager
-  - name: report-viewer
+  - name: shopping-entry
+  - name: yakujo-henko
+  - name: pay-create
