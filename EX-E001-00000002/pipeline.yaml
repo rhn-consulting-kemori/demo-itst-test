@@ -1,0 +1,48 @@
+test_id: EX-E001-00000002
+test_name: demo-apl-pileline
+test_description: デモアプリパイプライン：売上投入〜約定変更〜請求作成まで
+namespace_name: demo-itst
+parameters:
+  environment:
+    database: true
+    kafka: true
+    create_table: true
+    insert_table: true
+    create_table_image: create_table_demoapl
+    insert_table_image: insert_table_demoapl
+  test_scenario:
+    - name: D2025-05-01
+    - name: D2025-05-12
+    - name: D2025-05-15
+    - name: D2025-05-20
+  closing:
+    environment_remove: false
+pipelines:
+  - seq: 1
+    type: init
+    name: init-job
+    description: 開始
+  - seq: 2
+    type: environment
+    name: environment-workflow
+    description: 環境構築
+  - seq: 3
+    type: test_scenario
+    name: D2025-05-01
+    description: 環境テスト
+  - seq: 4
+    type: test_scenario
+    name: D2025-05-12
+    description: 売上処理
+  - seq: 5
+    type: test_scenario
+    name: D2025-05-15
+    description: 約定変更
+  - seq: 6
+    type: test_scenario
+    name: D2025-05-20
+    description: 請求締処理
+  - seq: 7
+    type: closing
+    name: closing-job
+    description: 終了
