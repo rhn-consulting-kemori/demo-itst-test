@@ -27,6 +27,10 @@ pipelines:
     name: environment-workflow
     description: 環境構築
   - seq: 3
+    type: test_scenario
+    name: D2025-05-01
+    description: 環境テスト
+  - seq: 4
     type: closing
     name: closing-job
     description: 終了
