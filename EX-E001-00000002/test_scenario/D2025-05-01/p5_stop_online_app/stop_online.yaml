@@ -2,3 +2,4 @@ delete_online_apps:
   - name: shopping-entry
   - name: yakujo-henko
   - name: pay-create
+  - name: demo-apl-viewer

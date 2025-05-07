@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: shopping-put
+  namespace: "{{ namespace_name }}"
+  labels:
+    app: shopping-put
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: shopping-put
+          image: quay.io/rhn_consulting_kemori/shopping-put:1.0.0
+          imagePullPolicy: Always
+          env:
+            - name: DB_URL
+              value: {{ database_app_name }}.{{ namespace_name }}.svc.cluster.local
+            - name: DB_USER_NAME
+              value: {{ pg_user }}
+            - name: DB_PASSWARD
+              value: {{ pg_password }}
+            - name: SIMURATION_DATE
+              value: "20250512"
+            - name: OUTPUT_FILENAME
+              value: "shopping_put_data.txt"
+            - name: DELETE_FILEPATH
+              value: "data/shopping_put_data.txt"
+          volumeMounts:
+            - name: shopping-put-vol
+              mountPath: /mnt/data
+      volumes:
+        - name: shopping-put-vol
+          persistentVolumeClaim:
+            claimName: "{{ pvc_name }}"
+      imagePullSecrets:
+        - name: "{{ image_pull_secret_name }}"

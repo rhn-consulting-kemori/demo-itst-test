@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ namespace_name }}
+  name: pay-create
+  labels:
+    app: pay-create
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pay-create
+  template:
+    metadata:
+      labels:
+        app: pay-create
+    spec:
+      containers:
+        - name: pay-create
+          image: quay.io/rhn_consulting_kemori/pay-create
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 8282
+              protocol: TCP
+          env:
+            - name: DB_URL
+              value: {{ database_app_name }}.{{ namespace_name }}.svc.cluster.local
+            - name: DB_PASSWARD
+              value: {{ pg_password }}
+            - name: DB_USER_NAME
+              value: {{ pg_user }}
+            - name: SIMURATION_DATE
+              value: "20250501"
+      imagePullSecrets:
+        - name: {{ image_pull_secret_name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pay-create
+  namespace: {{ namespace_name }}
+  labels:
+    app: pay-create
+spec:
+  type: ClusterIP
+  ports:
+    - name: 8282-tcp
+      protocol: TCP
+      port: 8282
+      targetPort: 8282
+  sessionAffinity: None
+  selector:
+    app: pay-create
+status:
+  loadBalancer: {}
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: pay-create
+  namespace: {{ namespace_name }}
+  labels:
+    app: pay-create
+spec:
+  host: pay-create-{{ namespace_name }}.{{ openshift_domain }}
+  to:
+    kind: Service
+    name: pay-create
+    weight: 100
+  port:
+    targetPort: 8282-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
