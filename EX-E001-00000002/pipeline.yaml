@@ -27,22 +27,6 @@ pipelines:
     name: environment-workflow
     description: 環境構築
   - seq: 3
-    type: test_scenario
-    name: D2025-05-01
-    description: 環境テスト
-  - seq: 4
-    type: test_scenario
-    name: D2025-05-12
-    description: 売上処理
-  - seq: 5
-    type: test_scenario
-    name: D2025-05-15
-    description: 約定変更
-  - seq: 6
-    type: test_scenario
-    name: D2025-05-20
-    description: 請求締処理
-  - seq: 7
     type: closing
     name: closing-job
     description: 終了
