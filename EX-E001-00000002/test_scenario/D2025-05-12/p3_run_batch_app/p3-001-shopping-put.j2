@@ -15,7 +15,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: DB_URL
-              value: {{ database_app_name }}.{{ namespace_name }}.svc.cluster.local
+              value: jdbc:postgresql://{{ database_app_name }}.{{ namespace_name }}.svc.cluster.local/{{ pg_database }}
             - name: DB_USER_NAME
               value: {{ pg_user }}
             - name: DB_PASSWARD

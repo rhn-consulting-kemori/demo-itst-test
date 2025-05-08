@@ -24,7 +24,7 @@ spec:
               protocol: TCP
           env:
             - name: DB_URL
-              value: {{ database_app_name }}.{{ namespace_name }}.svc.cluster.local
+              value: jdbc:postgresql://{{ database_app_name }}.{{ namespace_name }}.svc.cluster.local/{{ pg_database }}
             - name: DB_PASSWARD
               value: {{ pg_password }}
             - name: DB_USER_NAME
