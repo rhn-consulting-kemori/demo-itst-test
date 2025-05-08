@@ -11,10 +11,22 @@ parameters:
     create_table_image: create_table_demoapl
     insert_table_image: insert_table_demoapl
   test_scenario:
-    - name: D2025-05-01
-    - name: D2025-05-12
-    - name: D2025-05-15
-    - name: D2025-05-20
+    D2025-05-01:
+      assert_result: true
+      stop_online: true
+      delete_job: true
+    D2025-05-12:
+      assert_result: false
+      stop_online: false
+      delete_job: false
+    D2025-05-15:
+      assert_result: true
+      stop_online: true
+      delete_job: true
+    D2025-05-20:
+      assert_result: true
+      stop_online: true
+      delete_job: true
   closing:
     environment_remove: false
 pipelines:
