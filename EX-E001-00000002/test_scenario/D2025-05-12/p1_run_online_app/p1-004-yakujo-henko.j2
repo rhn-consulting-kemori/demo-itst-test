@@ -24,15 +24,15 @@ spec:
               protocol: TCP
           env:
             - name: DB_URL
-              value: {{ database_app_name }}.{{ namespace_name }}.svc.cluster.local
+              value: jdbc:postgresql://{{ database_app_name }}.{{ namespace_name }}.svc.cluster.local/{{ pg_database }}
             - name: DB_PASSWARD
               value: {{ pg_password }}
             - name: DB_USER_NAME
               value: {{ pg_user }}
             - name: SIMURATION_DATE
-              value: "20250501"
+              value: "20250512"
             - name: YAKUJO_HENKO_SPRV
-              value: pay-create.{{ namespace_name }}.svc.cluster.local/camel/demo/yakujo_henko/sprv
+              value: pay-create-{{ namespace_name }}.{{ openshift_domain }}/camel/demo/yakujo_henko/sprv
       imagePullSecrets:
         - name: {{ image_pull_secret_name }}
 ---
