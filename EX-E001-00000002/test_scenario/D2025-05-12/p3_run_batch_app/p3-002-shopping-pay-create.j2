@@ -14,18 +14,14 @@ spec:
           image: quay.io/rhn_consulting_kemori/shopping-pay-create:1.0.0
           imagePullPolicy: Always
           env:
-            - name: DB_URL
-              value: jdbc:postgresql://{{ database_app_name }}.{{ namespace_name }}.svc.cluster.local/{{ pg_database }}
-            - name: DB_USER_NAME
-              value: {{ pg_user }}
-            - name: DB_PASSWARD
-              value: {{ pg_password }}
             - name: SIMURATION_DATE
               value: "20250512"
-            - name: OUTPUT_FILENAME
+            - name: INPUT_FILENAME
               value: "shopping_put_data.txt"
-            - name: DELETE_FILEPATH
-              value: "/mnt/data/shopping/shopping_put_data.txt"
+            - name: URL_PAY_CREATE_SPRV
+              value: pay-create-{{ namespace_name }}.{{ openshift_domain }}/camel/demo/pay_create/sprv
+            - name: URL_PAY_CREATE_SP1
+              value: pay-create-{{ namespace_name }}.{{ openshift_domain }}/camel/demo/pay_create/sp1
           volumeMounts:
             - name: shopping-pay-create-vol
               mountPath: /mnt/data
