@@ -1,1 +1,4 @@
 tasks:
+  - seq: 1
+    name: assert-001-20250512-shopping_record
+    type: sql
