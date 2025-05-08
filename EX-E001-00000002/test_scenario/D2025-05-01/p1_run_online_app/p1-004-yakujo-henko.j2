@@ -32,7 +32,7 @@ spec:
             - name: SIMURATION_DATE
               value: "20250501"
             - name: YAKUJO_HENKO_SPRV
-              value: pay-create.{{ namespace_name }}.svc.cluster.local/camel/demo/yakujo_henko/sprv
+              value: pay-create-{{ namespace_name }}.{{ openshift_domain }}/camel/demo/yakujo_henko/sprv
       imagePullSecrets:
         - name: {{ image_pull_secret_name }}
 ---
