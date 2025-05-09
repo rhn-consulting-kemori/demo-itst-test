@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pay-fix-doc-create
+  namespace: "{{ namespace_name }}"
+  labels:
+    app: pay-fix-doc-create
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: pay-fix-doc-create
+          image: quay.io/rhn_consulting_kemori/pay-fix-doc-create:1.0.0
+          imagePullPolicy: Always
+          env:
+            - name: DB_URL
+              value: jdbc:postgresql://{{ database_app_name }}.{{ namespace_name }}.svc.cluster.local/{{ pg_database }}
+            - name: DB_USER_NAME
+              value: {{ pg_user }}
+            - name: DB_PASSWARD
+              value: {{ pg_password }}
+            - name: SIMURATION_DATE
+              value: "20250520"
+            - name: SEIKYU_SHIMEBI
+              value: "20250515"
+            - name: DOC_FILENAME
+              value: "pay_fix_doc.txt"
+          volumeMounts:
+            - name: pay-fix-doc-create-vol
+              mountPath: /mnt/data
+      volumes:
+        - name: pay-fix-doc-create-vol
+          persistentVolumeClaim:
+            claimName: "{{ pvc_name }}"
+      imagePullSecrets:
+        - name: "{{ image_pull_secret_name }}"

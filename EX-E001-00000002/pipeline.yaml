@@ -36,6 +36,10 @@ pipelines:
     name: D2025-05-15
     description: 約定変更
   - seq: 6
+    type: test_scenario
+    name: D2025-05-20
+    description: 請求締処理  
+  - seq: 7
     type: closing
     name: closing-job
     description: 終了
