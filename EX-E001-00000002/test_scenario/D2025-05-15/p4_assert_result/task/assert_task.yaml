@@ -1,0 +1,7 @@
+tasks:
+  - seq: 1
+    name: assert-001-20250515-customer
+    type: sql
+  - seq: 2
+    name: assert-002-20250515-pay-record
+    type: sql

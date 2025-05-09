@@ -32,6 +32,10 @@ pipelines:
     name: D2025-05-12
     description: 売上登録
   - seq: 5
+    type: test_scenario
+    name: D2025-05-15
+    description: 約定変更
+  - seq: 6
     type: closing
     name: closing-job
     description: 終了

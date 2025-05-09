@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ namespace_name }}
+  name: demo-apl-viewer
+  labels:
+    app: demo-apl-viewer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-apl-viewer
+  template:
+    metadata:
+      labels:
+        app: demo-apl-viewer
+    spec:
+      containers:
+        - name: demo-apl-viewer
+          image: quay.io/rhn_consulting_kemori/demo-apl-viewer
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 8288
+              protocol: TCP
+          env:
+            - name: DB_HOST
+              value: {{ database_app_name }}.{{ namespace_name }}.svc.cluster.local
+            - name: DB_NAME
+              value: {{ pg_database }}
+            - name: DB_PASS
+              value: {{ pg_password }}
+            - name: DB_PORT
+              value: '{{ pg_port }}'
+            - name: DB_USER
+              value: {{ pg_user }}
+      imagePullSecrets:
+        - name: {{ image_pull_secret_name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-apl-viewer
+  namespace: {{ namespace_name }}
+  labels:
+    app: demo-apl-viewer
+spec:
+  type: ClusterIP
+  ports:
+    - name: 8288-tcp
+      protocol: TCP
+      port: 8288
+      targetPort: 8288
+  sessionAffinity: None
+  selector:
+    app: demo-apl-viewer
+status:
+  loadBalancer: {}
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: demo-apl-viewer
+  namespace: {{ namespace_name }}
+  labels:
+    app: demo-apl-viewer
+spec:
+  host: demo-apl-viewer-{{ namespace_name }}.{{ openshift_domain }}
+  to:
+    kind: Service
+    name: demo-apl-viewer
+    weight: 100
+  port:
+    targetPort: 8288-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

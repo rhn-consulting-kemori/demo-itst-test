@@ -1,0 +1,7 @@
+data_entry_name: shopping_entry
+call_api_url: https://yakujo-henko-{{ namespace_name }}.{{ openshift_domain }}/camel/demo/yakujohenko/entry
+call_api_method: POST
+ok_response_code: 200
+description: 約定変更
+data_list:
+    - '{"customer_number": "0000000001", "sprv_limit_amount_flg": "0", "sprv_init_furi_menjo_flg": "0", "sprv_monthly_payamount_flg": "1", "sprv_rate_flg": "0", "sprv_limit_amount": 500000, "sprv_init_furi_menjo": "0", "sprv_monthly_payamount": 50000, "sprv_rate": 0.15}'
