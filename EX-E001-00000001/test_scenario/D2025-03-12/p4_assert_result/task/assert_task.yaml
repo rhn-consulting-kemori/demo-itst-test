@@ -2,12 +2,17 @@ tasks:
   - seq: 1
     name: assert-001-20250312-test-result
     type: sql
+    file: 
   - seq: 2
     name: assert-002-20250312-test-task-run
     type: sql
+    file: 
   - seq: 3
     name: assert-003-20250312-test-version-run
     type: sql
+    file: 
   - seq: 4
     name: assert-004-20250312-test-pipeline-summary
     type: sql
+    file: 
+require: true

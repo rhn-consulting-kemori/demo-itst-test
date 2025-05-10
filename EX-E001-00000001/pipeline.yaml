@@ -11,8 +11,7 @@ parameters:
     create_table_image: create_table
     insert_table_image: insert_table
   test_scenario:
-    - name: D2025-03-01
-    - name: D2025-03-12
+    delete_job: true
   closing:
     environment_remove: false
 pipelines:
