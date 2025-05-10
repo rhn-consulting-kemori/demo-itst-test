@@ -1,6 +1,6 @@
 test_id: EX-E001-00000001
 test_name: test-pileline
-test_description: デモパイプライン：環境構築するけど、スクラップはしない。
+test_description: デモパイプライン
 namespace_name: demo-itst
 parameters:
   environment:
@@ -13,7 +13,7 @@ parameters:
   test_scenario:
     delete_job: true
   closing:
-    environment_remove: false
+    environment_remove: true
 pipelines:
   - seq: 1
     type: init
