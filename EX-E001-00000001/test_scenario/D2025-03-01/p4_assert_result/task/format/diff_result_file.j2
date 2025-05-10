@@ -5,6 +5,7 @@ metadata:
   namespace: "{{ namespace_name }}"
   labels:
     app: diff-{{ assert_task_name }}
+    app.openshift.io/runtime: python
 spec:
   template:
     spec:

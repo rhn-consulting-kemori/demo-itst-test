@@ -5,6 +5,7 @@ metadata:
   namespace: "{{ namespace_name }}"
   labels:
     app: demo-batch-job1
+    app.openshift.io/runtime: spring-boot
 spec:
   template:
     spec:

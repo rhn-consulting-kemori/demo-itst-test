@@ -5,6 +5,7 @@ metadata:
   namespace: "{{ namespace_name }}"
   labels:
     app: get-database-{{ assert_task_name }}
+    app.openshift.io/runtime=stackoverflow
 spec:
   template:
     spec:
