@@ -3,4 +3,4 @@ tasks:
     name: assert-001-20250501-customer
     type: sql
     file: 
-require: false
+require: true
