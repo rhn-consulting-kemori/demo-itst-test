@@ -2,6 +2,9 @@ tasks:
   - seq: 1
     name: assert-001-20250512-shopping-record
     type: sql
+    file: 
   - seq: 2
     name: assert-002-20250512-pay-record
     type: sql
+    file: 
+require: true
