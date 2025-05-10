@@ -2,3 +2,12 @@ tasks:
   - seq: 1
     name: assert-001-20250520-pay-fix-inf
     type: sql
+    file: 
+  - seq: 2
+    name: assert-002-20250520-pay-fix-doc
+    type: file
+    file:
+      actual_file_path: /mnt/data/pay/
+      actual_file_name: pay_fix_doc.txt
+      expected_file_type: txt
+require: true
