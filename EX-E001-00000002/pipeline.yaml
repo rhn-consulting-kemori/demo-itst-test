@@ -5,7 +5,7 @@ namespace_name: demo-itst
 parameters:
   environment:
     database: true
-    kafka: true
+    kafka: false
     create_table: true
     insert_table: true
     create_table_image: create_table_demoapl
