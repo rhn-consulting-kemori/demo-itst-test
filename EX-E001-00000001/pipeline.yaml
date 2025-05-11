@@ -13,7 +13,7 @@ parameters:
   test_scenario:
     delete_job: true
   closing:
-    environment_remove: true
+    environment_remove: false
 pipelines:
   - seq: 1
     type: init
