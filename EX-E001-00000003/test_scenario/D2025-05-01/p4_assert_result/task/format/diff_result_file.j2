@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: diff-{{ assert_task_name }}
+  namespace: "{{ namespace_name }}"
+  labels:
+    app: diff-{{ assert_task_name }}
+    app.openshift.io/runtime: python
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: diff-{{ assert_task_name }}
+          image: quay.io/rhn_consulting_kemori/diff-result:latest
+          imagePullPolicy: Always
+          env:
+            - name: ACTUAL_DIR_PATH
+              value: {{ actual_file_path }}
+            - name: EXPECTED_DIR_PATH
+              value: /mnt/data/assert/expected/
+            - name: DIFF_DIR_PATH
+              value: /mnt/data/assert/diff/
+            - name: ACTUAL_FILE_NAME
+              value: {{ actual_file_name }}
+            - name: EXPECTED_FILE_NAME
+              value: expected-{{ assert_task_name }}.{{ expected_file_type }}
+            - name: DIFF_FILE_NAME
+              value: diff-{{ assert_task_name }}.txt
+          volumeMounts:
+            - name: diff-{{ assert_task_name }}-vol
+              mountPath: /mnt/data
+      volumes:
+        - name: diff-{{ assert_task_name }}-vol
+          persistentVolumeClaim:
+            claimName: "{{ pvc_name }}"
+      imagePullSecrets:
+        - name: "{{ image_pull_secret_name }}"

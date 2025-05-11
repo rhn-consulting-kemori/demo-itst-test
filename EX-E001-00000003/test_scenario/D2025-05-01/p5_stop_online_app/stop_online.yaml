@@ -1,0 +1,3 @@
+delete_online_apps:
+  - name: shopping-entry
+require: false
