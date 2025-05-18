@@ -1,7 +1,7 @@
 test_id: EX-E001-00000001
 test_name: test-pileline
 test_description: デモパイプライン
-namespace_name: demo-itst
+namespace_name: demo-itst-1
 parameters:
   environment:
     database: true
