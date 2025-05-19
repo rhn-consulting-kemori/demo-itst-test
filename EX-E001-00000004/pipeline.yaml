@@ -11,9 +11,9 @@ parameters:
     create_table_image: create_table_demoapl
     insert_table_image: insert_table_demoapl
   test_scenario:
-    delete_job: false
+    delete_job: true
   closing:
-    environment_remove: false
+    environment_remove: true
 pipelines:
   - seq: 1
     type: init
