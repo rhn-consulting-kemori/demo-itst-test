@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ namespace_name }}
+  name: yakujo-henko
+  labels:
+    app: yakujo-henko
+    app.openshift.io/runtime: camel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yakujo-henko
+  template:
+    metadata:
+      labels:
+        app: yakujo-henko
+    spec:
+      containers:
+        - name: yakujo-henko
+          image: quay.io/rhn_consulting_kemori/yakujo-henko:1.0.0
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 8284
+              protocol: TCP
+          env:
+            - name: DB_URL
+              value: jdbc:postgresql://{{ database_app_name }}.{{ namespace_name }}.svc.cluster.local/{{ pg_database }}
+            - name: DB_PASSWARD
+              value: {{ pg_password }}
+            - name: DB_USER_NAME
+              value: {{ pg_user }}
+            - name: SIMURATION_DATE
+              value: "20250512"
+            - name: YAKUJO_HENKO_SPRV
+              value: pay-create-{{ namespace_name }}.{{ openshift_domain }}/camel/demo/yakujo_henko/sprv
+      imagePullSecrets:
+        - name: {{ image_pull_secret_name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yakujo-henko
+  namespace: {{ namespace_name }}
+  labels:
+    app: yakujo-henko
+spec:
+  type: ClusterIP
+  ports:
+    - name: 8284-tcp
+      protocol: TCP
+      port: 8284
+      targetPort: 8284
+  sessionAffinity: None
+  selector:
+    app: yakujo-henko
+status:
+  loadBalancer: {}
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: yakujo-henko
+  namespace: {{ namespace_name }}
+  labels:
+    app: yakujo-henko
+spec:
+  host: yakujo-henko-{{ namespace_name }}.{{ openshift_domain }}
+  to:
+    kind: Service
+    name: yakujo-henko
+    weight: 100
+  port:
+    targetPort: 8284-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

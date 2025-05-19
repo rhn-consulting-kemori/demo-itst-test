@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: shopping-pay-create
+  namespace: "{{ namespace_name }}"
+  labels:
+    app: shopping-pay-create
+    app.openshift.io/runtime: spring-boot
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: shopping-pay-create
+          image: quay.io/rhn_consulting_kemori/shopping-pay-create:1.0.0
+          imagePullPolicy: Always
+          env:
+            - name: SIMURATION_DATE
+              value: "20250512"
+            - name: INPUT_FILENAME
+              value: "shopping_put_data.txt"
+            - name: URL_PAY_CREATE_SPRV
+              value: pay-create-{{ namespace_name }}.{{ openshift_domain }}/camel/demo/pay_create/sprv
+            - name: URL_PAY_CREATE_SP1
+              value: pay-create-{{ namespace_name }}.{{ openshift_domain }}/camel/demo/pay_create/sp1
+          volumeMounts:
+            - name: shopping-pay-create-vol
+              mountPath: /mnt/data
+      volumes:
+        - name: shopping-pay-create-vol
+          persistentVolumeClaim:
+            claimName: "{{ pvc_name }}"
+      imagePullSecrets:
+        - name: "{{ image_pull_secret_name }}"

@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ namespace_name }}
+  name: shopping-entry
+  labels:
+    app: shopping-entry
+    app.openshift.io/runtime: camel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopping-entry
+  template:
+    metadata:
+      labels:
+        app: shopping-entry
+    spec:
+      containers:
+        - name: shopping-entry
+          image: quay.io/rhn_consulting_kemori/shopping-entry:1.0.0
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 8280
+              protocol: TCP
+          env:
+            - name: DB_URL
+              value: jdbc:postgresql://{{ database_app_name }}.{{ namespace_name }}.svc.cluster.local/{{ pg_database }}
+            - name: DB_PASSWARD
+              value: {{ pg_password }}
+            - name: DB_USER_NAME
+              value: {{ pg_user }}
+            - name: SIMURATION_DATE
+              value: "20250501"
+      imagePullSecrets:
+        - name: {{ image_pull_secret_name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopping-entry
+  namespace: {{ namespace_name }}
+  labels:
+    app: shopping-entry
+spec:
+  type: ClusterIP
+  ports:
+    - name: 8280-tcp
+      protocol: TCP
+      port: 8280
+      targetPort: 8280
+  sessionAffinity: None
+  selector:
+    app: shopping-entry
+status:
+  loadBalancer: {}
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: shopping-entry
+  namespace: {{ namespace_name }}
+  labels:
+    app: shopping-entry
+spec:
+  host: shopping-entry-{{ namespace_name }}.{{ openshift_domain }}
+  to:
+    kind: Service
+    name: shopping-entry
+    weight: 100
+  port:
+    targetPort: 8280-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

@@ -1,0 +1,37 @@
+test_id: EX-E001-00000004
+test_name: demo-apl-pileline-short
+test_description: デモアプリパイプライン：売上投入のみ
+namespace_name: demo-itst-4
+parameters:
+  environment:
+    database: true
+    kafka: false
+    create_table: true
+    insert_table: true
+    create_table_image: create_table_demoapl
+    insert_table_image: insert_table_demoapl
+  test_scenario:
+    delete_job: false
+  closing:
+    environment_remove: false
+pipelines:
+  - seq: 1
+    type: init
+    name: init-job
+    description: 開始
+  - seq: 2
+    type: environment
+    name: environment-workflow
+    description: 環境構築
+  - seq: 3
+    type: test_scenario
+    name: D2025-05-01
+    description: 環境テスト
+  - seq: 4
+    type: test_scenario
+    name: D2025-05-12
+    description: 売上登録
+  - seq: 5
+    type: closing
+    name: closing-job
+    description: 終了
