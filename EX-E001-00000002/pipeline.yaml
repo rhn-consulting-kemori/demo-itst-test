@@ -1,7 +1,7 @@
 test_id: EX-E001-00000002
 test_name: demo-apl-pileline
 test_description: デモアプリパイプライン：売上投入〜約定変更〜請求作成まで
-namespace_name: demo-itst
+namespace_name: demo-itst-2
 parameters:
   environment:
     database: true
